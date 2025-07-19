@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Счётчик приезда Александра :)",
-  description: "Made with ❤ in zamelane",
+  description: "Made with ❤ by zamelane",
 };
 
 export default function RootLayout({
