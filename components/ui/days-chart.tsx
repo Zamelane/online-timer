@@ -9,6 +9,7 @@ import {
 } from "recharts"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { dateCalculated, monthDiff } from "@/lib/dateCalculated"
+import { pluralize } from "numeralize-ru"
 
 const startDate = new Date('2025-07-08')
 const endDate = new Date('2026-07-08')
@@ -29,9 +30,10 @@ export const calculatedLeftMonths = () => monthDiff(endDate, new Date())
 
 export function ChartRadialShape() {
   const leftDays = calculatedLeftDays()
+  const passedDays = totalDays - leftDays
 
   const chartData = [
-    { browser: "safari", days: totalDays - leftDays, fill: "var(--color-safari)" },
+    { browser: "safari", days: passedDays, fill: "var(--color-safari)" },
   ]
 
   return (
@@ -41,7 +43,7 @@ export function ChartRadialShape() {
     >
       <RadialBarChart
         data={chartData}
-        endAngle={360 * ((totalDays - leftDays) / totalDays)}
+        endAngle={360 * (passedDays / totalDays)}
         innerRadius={80}
         outerRadius={140}
       >
@@ -76,7 +78,7 @@ export function ChartRadialShape() {
                       y={(viewBox.cy || 0) + 24}
                       className="fill-muted-foreground"
                     >
-                      Дней прошло
+                      {pluralize(passedDays, 'День прошёл', 'Дня прошло', 'Дней прошло')}
                     </tspan>
                   </text>
                 )
